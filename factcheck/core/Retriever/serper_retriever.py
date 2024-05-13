@@ -86,7 +86,7 @@ class SerperEvidenceRetriever:
                     }
             else:
                 results = result.get("organic", [])[:top_k]  # Choose top 5 result
-                merge_evidence_text = [f"Text: {_result['snippet']} \n Source: {_result['link']}" for _result in results]
+                merge_evidence_text = [f"Text: {_result['snippet']} \n Source: {_result['link']} \n Date: {_result.get('date', 'Unknown')}" for _result in results]
                 merge_evidence_text = [re.sub(r"\n+", "\n", evidence) for evidence in merge_evidence_text]
                 evidences[i] = {
                     "text": "\n\n".join(merge_evidence_text),
@@ -160,7 +160,7 @@ class SerperEvidenceRetriever:
         for _query in query_snippet_dict.keys():
             _query_index = query_list.index(_query)
             _snippet_list = query_snippet_dict[_query]
-            merge_evidence_text = [f"Text: {snippet} \n Source: {_url}" for snippet, _url in zip(_snippet_list, url_to_check)]
+            merge_evidence_text = [f"Text: {snippet} \n Source: {_url} \n Date: {url_to_date.get(_url, 'Unknown')}" for snippet, _url in zip(_snippet_list, url_to_check)]
             merge_evidence_text = [re.sub(r"\n+", "\n", evidence) for evidence in merge_evidence_text]
             evidences[_query_index] = {
                 "text": "\n\n".join(merge_evidence_text),
