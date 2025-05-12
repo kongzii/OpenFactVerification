@@ -71,10 +71,12 @@ class BaseClient:
         return response
 
     def multi_call(self, messages_list, **kwargs):
-        tasks = [self._async_call(messages=messages, **kwargs) for messages in messages_list]
-        asyncio.set_event_loop(asyncio.SelectorEventLoop())
-        loop = asyncio.get_event_loop()
-        responses = loop.run_until_complete(asyncio.gather(*tasks))
+        # Testing synchronous calls as a hotfix for Langfuse observations, which seems to be out-of-structure because of this.
+        responses = [self._call(messages=messages, **kwargs) for messages in messages_list]
+        # tasks = [self._async_call(messages=messages, **kwargs) for messages in messages_list]
+        # asyncio.set_event_loop(asyncio.SelectorEventLoop())
+        # loop = asyncio.get_event_loop()
+        # responses = loop.run_until_complete(asyncio.gather(*tasks))
         return responses
 
     def _expire_old_traffic(self):
