@@ -65,11 +65,14 @@ class SerperEvidenceRetriever:
             logger.error("Serper API request error!")
             return evidences
 
+        serper_response_json = serper_response.json()
+        logger.info(f"Serper response: {serper_response_json=}")
+
         # get the results for queries with an answer box
         query_url_dict = {}
         url_to_date = {}  # TODO: decide whether to use date
         _snippet_to_check = []
-        for i, (query, result) in enumerate(zip(query_list, serper_response.json())):
+        for i, (query, result) in enumerate(zip(query_list, serper_response_json)):
             if query != result.get("searchParameters").get("q"):
                 logger.error("Serper change query from {} TO {}".format(query, result.get("searchParameters").get("q")))
 
