@@ -74,7 +74,7 @@ class SerperEvidenceRetriever:
         _snippet_to_check = []
         for i, (query, result) in enumerate(zip(query_list, serper_response_json)):
             if query != result.get("searchParameters").get("q"):
-                logger.error("Serper change query from {} TO {}".format(query, result.get("searchParameters").get("q")))
+                logger.info("Serper change query from {} TO {}".format(query, result.get("searchParameters").get("q")))
 
             if "answerBox" in result:
                 if "answer" in result["answerBox"]:
