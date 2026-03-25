@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "openfactverification-kongzii"
-version = "0.5.3"
+version = "0.6.0"
 packages = [
     {include = "factcheck"}
 ]
@@ -29,7 +29,7 @@ bs4 = "^0.0.2"
 Flask = { version = "^3.0.3", optional = true }
 httpx = ">=0.25.1,<1"
 nltk = "^3.8.1"
-openai = "^1.16.2"
+openai = "^2.0.0"
 opencv-python = "^4.9.0.80"
 pandas = "^2.2.1"
 playwright = "^1.42.0"
